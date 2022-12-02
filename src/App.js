@@ -3,12 +3,11 @@ import Cards from './components/Cards.jsx'
 import { useState } from 'react';
 import styled from "styled-components";
 import Nav from './components/Nav';
+import {Routes, Route} from 'react-router-dom';
+import About from './components/About';
+import Detail from './components/Detail';
 
 const AppStyle = styled.div `
-  background-image: url(https://i.pinimg.com/originals/f2/7d/7e/f27d7ec85dedb8148919b237cd4ea3e8.jpg);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   color: #ffffff;
   display: block;
   block-size: 100% 100%;
@@ -38,13 +37,15 @@ function App () {
       <div>
         <Nav onSearch={onSearch}/>
       </div>
-      
-      <div>
-        <Cards
+      <Routes>
+        <Route path='/home' element={<Cards
           characters={characters} onClose={onClose}
-        />
-      </div>
+        />}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/detail/:detailId' element={<Detail/>}/>
+      </Routes>
       
+            
     </AppStyle>
   )
 }

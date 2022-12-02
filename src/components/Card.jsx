@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 const DivStyle = styled.div `
@@ -41,11 +42,14 @@ const ButtonStyle = styled.button `
 `
 
 
-export default function Card({name, species, gender, image, onClose}) {
+export default function Card(props) {
+   const {name, species, gender, image, onClose} = props;
    return (
       <DivStyle>
          <ButtonStyle onClick={onClose}> X </ButtonStyle>
+         <Link to={`/detail/${props.id}`}>
          <h2> Nombre : {name} </h2>
+         </Link>
          <h3> Especie: {species} </h3>
          <h3> Género: {gender} </h3>
          <ImageStyle  src={image} alt="name" />
