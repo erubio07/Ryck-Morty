@@ -47,12 +47,13 @@ export default function Card(props) {
    return (
       <DivStyle>
          <ButtonStyle onClick={onClose}> X </ButtonStyle>
+         <h6>{props.id}</h6>
          <Link to={`/detail/${props.id}`}>
          <h2> Nombre : {name} </h2>
          </Link>
          <h3> Especie: {species} </h3>
          <h3> Género: {gender} </h3>
-         <ImageStyle  src={image} alt="name" />
+         <ImageStyle  src={image} alt={name} />
       </DivStyle>
    );
 }

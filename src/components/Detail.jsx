@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function About (props) {
+export default function Detail () {
     const {detailId} = useParams();
     const [character, setCaharacter] = useState();
     useEffect(() => {
@@ -22,7 +22,14 @@ export default function About (props) {
         return setCaharacter({});
      }, [detailId]);
 
-    return <div>
-        <h1>{character.name}</h1>
-    </div>
+    return <div>{character ? <div>
+        <div>
+        <h1>Nombre: {character.name}</h1>
+        <h5>Status: {character.status}</h5>
+        <h5>Specie: {character.specie}</h5>
+        <h5>Género: {character.gender}</h5>
+        <h5>Origen: {character.origin?.name}</h5>
+        </div>
+        <img src={character.image} alt={character.name}/>
+        </div> : ""}</div>;
 }
