@@ -47,7 +47,7 @@ export default function Card(props) {
    return (
       <DivStyle>
          <ButtonStyle onClick={onClose}> X </ButtonStyle>
-         <h6>{props.id}</h6>
+         {/* <h6>{props.id}</h6> */}
          <Link to={`/detail/${props.id}`}>
          <h2> Nombre : {name} </h2>
          </Link>
