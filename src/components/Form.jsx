@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import validations from "./validations"
+import {validation} from "./validations"
+
 
 
 export default function Form (props){
     
-    const [userData, setuserData] = useState({
+    const [userData, setUserData] = useState({
         username : "",
         password : "",
     });
@@ -16,19 +17,24 @@ export default function Form (props){
     });
 
     const handleInputChange = (e) =>{
-        setErrors (validations({
+        setErrors (validation({
             ...userData,
             [e.target.name] : e.target.value
         })
         );
-        setuserData({
+        setUserData({
             ...userData,
             [e.target.name] : e.target.value
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     props.login(userData);
+    // }
+
+    function handleSubmit (e) {
+        e.preventDefault ();
         props.login(userData);
     }
 
@@ -36,10 +42,10 @@ export default function Form (props){
     return <div>
         <Form onSubmit={handleSubmit}>
         <label htmlFor="name">Username:</label>
-        <input type="text" name="username" value={userData.username} onChange={handleInputChange}/>
+        <input id="username"type="text" name="username" value={userData.username} onChange={handleInputChange}/>
         <p>{errors.username && errors.username}</p>
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" value={userData.password} onChange={handleInputChange}/>
+        <input id="password" type="password" name="password" value={userData.password} onChange={handleInputChange}/>
         <p>{errors.password && errors.password}</p>
         <button type="submit">Submit</button>
         </Form>

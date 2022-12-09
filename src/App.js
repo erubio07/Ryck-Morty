@@ -33,10 +33,11 @@ function App () {
   //al que se pasa por parametros se quiten del arreglo
  }
 
- const navigate = useNavigate();
+const location = useLocation(); 
+const navigate = useNavigate();
 const [access, setAccess] = useState(false);
-const username = 'ejemplo@gmail.com';
-const password = '1password';
+const username = 'erubio07@gmail.com';
+const password = 'erubio07';
 
 function login(userData) {
    if (userData.password === password && userData.username === username) {
@@ -47,13 +48,14 @@ function login(userData) {
 
 useEffect(() => {
   !access && navigate('/');
-}, [access, navigate]);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [access]);
 
   return (
     <AppStyle className='App' style={{ padding: '25px' }}>
       
       <div>
-        {Location.pathname === "/" ? null : <Nav onSearch={onSearch}/>}
+        {location.pathname === "/" ? null : <Nav onSearch={onSearch}/>}
       </div>
       <Routes>
         <Route path='/' element={<Form login={login}/>}/>
