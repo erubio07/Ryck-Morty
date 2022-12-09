@@ -18,6 +18,7 @@ const NavStyle = styled.div `
 
 export default function Nav ({onSearch}) {
 
+    
     return (
     <NavStyle>
         <NavLink to="/home">Home</NavLink>

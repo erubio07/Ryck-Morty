@@ -1,11 +1,12 @@
 import './App.css'
 import Cards from './components/Cards.jsx'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Nav from './components/Nav';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import About from './components/About';
 import Detail from './components/Detail';
+import Form from "./components/Form"
 
 const AppStyle = styled.div `
   color: #ffffff;
@@ -31,13 +32,31 @@ function App () {
   setCharacters(characters.filter(char => char.id !== id)) //seteamos el estado de characteres y con el filter le decimos que todos los id que sean distintos
   //al que se pasa por parametros se quiten del arreglo
  }
+
+ const navigate = useNavigate();
+const [access, setAccess] = useState(false);
+const username = 'ejemplo@gmail.com';
+const password = '1password';
+
+function login(userData) {
+   if (userData.password === password && userData.username === username) {
+      setAccess(true);
+      navigate('/home');
+   }
+}
+
+useEffect(() => {
+  !access && navigate('/');
+}, [access, navigate]);
+
   return (
     <AppStyle className='App' style={{ padding: '25px' }}>
       
       <div>
-        <Nav onSearch={onSearch}/>
+        {Location.pathname === "/" ? null : <Nav onSearch={onSearch}/>}
       </div>
       <Routes>
+        <Route path='/' element={<Form login={login}/>}/>
         <Route path='/home' element={<Cards
           characters={characters} onClose={onClose}
         />}/>
