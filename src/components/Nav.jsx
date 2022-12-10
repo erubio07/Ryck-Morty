@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import About from "./About";
+//import About from "./About";
 //Nav se convierte en padre de SearchBar
 
 const NavStyle = styled.div `
@@ -24,6 +24,7 @@ export default function Nav ({onSearch}) {
         <NavLink to="/home">Home</NavLink>
         <br/>
         <NavLink to="/about">About</NavLink>
+        <NavLink to="/favorites">Favorites</NavLink>
         <SearchBar onSearch = {onSearch}/>
     </NavStyle>
     )

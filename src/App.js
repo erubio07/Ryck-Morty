@@ -7,6 +7,7 @@ import {Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import About from './components/About';
 import Detail from './components/Detail';
 import Form from "./components/Form"
+import Favorites from './components/Favorites';
 
 const AppStyle = styled.div `
   color: #ffffff;
@@ -64,6 +65,7 @@ useEffect(() => {
         />}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/detail/:detailId' element={<Detail/>}/>
+      <Route path='/favorites' element={<Favorites/>}/>
       </Routes>
       
             

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {addFavorites, deleteFavorites} from "../components/redux/action";
+import { connect } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 const DivStyle = styled.div `
@@ -42,12 +46,38 @@ const ButtonStyle = styled.button `
 `
 
 
-export default function Card(props) {
+export function Card(props) {
    const {name, species, gender, image, onClose} = props;
+   const [isFav, setIsFav] = useState(false)
+   
+   const handleFavorite = () =>{
+      if (isFav){
+         setIsFav (false)
+         props.deleteFavorites(props.id)
+      } else{
+         setIsFav(true)
+         props.addFavorites(props.id)
+      }
+   }
+
+   useEffect(() => {
+      props.myFavorites.forEach((fav) => {
+         if (fav.id === props.id) {
+            setIsFav(true);
+         }
+      });
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [props.myFavorites]);
    return (
       <DivStyle>
          <ButtonStyle onClick={onClose}> X </ButtonStyle>
          {/* <h6>{props.id}</h6> */}
+         {isFav ? (
+          <button onClick={handleFavorite}>❤️</button>
+             ) : (
+         <button onClick={handleFavorite}>🤍</button>
+             )
+         }
          <Link to={`/detail/${props.id}`}>
          <h2> Nombre : {name} </h2>
          </Link>
@@ -57,3 +87,22 @@ export default function Card(props) {
       </DivStyle>
    );
 }
+
+export function mapDispatchToProps (dispatch){
+   return {
+      addFavorites: function (id) {
+         dispatch(addFavorites(id))
+      },
+      deleteFavorites: function (id) {
+         dispatch(deleteFavorites(id))
+      },
+   }
+}
+
+export function mapStateToProps (state){
+   return {
+      myFavorites: state.myFavorites
+   }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)
